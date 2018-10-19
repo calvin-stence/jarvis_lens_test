@@ -18,9 +18,9 @@ def test():
         plt.figure(i)
         plt.imshow(quadrants[i])
     white_pixels = []
-    white_pixels = white_pixel_ratio(quadrants,1)
+    white_pixels = white_pixel_ratio(quadrants, 1)
     for j in range(len(white_pixels)):
-        white_pixels[j] =  white_pixels[j]
+        white_pixels[j] = white_pixels[j]
     plt.show()
 
 
@@ -52,7 +52,7 @@ def main():
                 else:
                     print('Test passed. The minimum area ratio was ' + str(min(area_ratio)))
                     test_result = 'PASS'
-                #if test_result == 'FAIL':
+                # if test_result == 'FAIL':
                 #    plt.imshow(thresh_crop)
                 #    plt.show()
             except TypeError:
@@ -67,8 +67,9 @@ def main():
             cv2.imwrite(
                 'cropped_results\\' + re.sub(r'.png', '', os.path.basename(file)) + '_' + test_result + '_analyzed.png',
                 thresh_crop)
-            cv2.imwrite('cropped_results\\' + re.sub(r'.png', '', os.path.basename(file)) + '_' + test_result + '_unanalyzed.png',
-                       crop)
+            cv2.imwrite('cropped_results\\' + re.sub(r'.png', '',
+                                                     os.path.basename(file)) + '_' + test_result + '_unanalyzed.png',
+                        crop)
 
         # results_compare.update({'Test' + str(index): results})
     pp = pprint.PrettyPrinter(indent=4)
@@ -150,20 +151,19 @@ def get_lens_edge(filename):
         # plt.show()
         quadrants = []
         quadrants = return_image_quadrants(thresh_crop)
-        #print(quadrants)
+        # print(quadrants)
         area_ratio = []
         pi = np.pi
         area = pi / 4 * ((outer_radius) ** 2 - inner_radius ** 2)
-        area_ratio = white_pixel_ratio(quadrants,area)
+        area_ratio = white_pixel_ratio(quadrants, area)
 
-        #plt.imshow(quadrants[1])
-        #plt.show
-        #print(white_pixel_count_quadrants)
-
+        # plt.imshow(quadrants[1])
+        # plt.show
+        # print(white_pixel_count_quadrants)
 
         # print(area)
         # print(white_pixel_count)
-        #area_ratio = white_pixel_count_quadrants / area
+        # area_ratio = white_pixel_count_quadrants / area
         # print(area_ratio)
         return crib, area_ratio, radii, thresh_crop, crop, preprocessed_image
     except TypeError:
@@ -173,13 +173,13 @@ def get_lens_edge(filename):
         pass
 
 
-def white_pixel_ratio(image_list,theoretical_white_area):
+def white_pixel_ratio(image_list, theoretical_white_area):
     pixel_count_list = []
     for i in range(len(image_list)):
         white_pixel_count = np.sum(image_list[i] == 255)
-        pixel_count_list.append(white_pixel_count/theoretical_white_area)
-        #print(theoretical_white_area)
-        #print(white_pixel_count)
+        pixel_count_list.append(white_pixel_count / theoretical_white_area)
+        # print(theoretical_white_area)
+        # print(white_pixel_count)
     return pixel_count_list
 
 
